@@ -1,38 +1,71 @@
-import { Tabs } from 'expo-router'
-import React from 'react'
+import { playbackService } from '@/constants/playbackService'
+import { colors } from '@/constants/tokens'
+import { useLogTrackPlayerState } from '@/hooks/useLogTrackPlayerState'
+import { useSetupTrackPlayer } from '@/hooks/useSetupTrackPlayer'
+import { SplashScreen, Stack } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
+import { useCallback } from 'react'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import TrackPlayer from 'react-native-track-player'
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon'
-import { Colors } from '@/constants/Colors'
-import { useColorScheme } from '@/hooks/useColorScheme'
+SplashScreen.preventAutoHideAsync()
 
-export default function TabLayout() {
-	const colorScheme = useColorScheme()
+TrackPlayer.registerPlaybackService(() => playbackService)
+
+const App = () => {
+	const handleTrackPlayerLoaded = useCallback(() => {
+		SplashScreen.hideAsync()
+	}, [])
+
+	useSetupTrackPlayer({
+		onLoad: handleTrackPlayerLoaded,
+	})
+
+	useLogTrackPlayerState()
 
 	return (
-		<Tabs
-			screenOptions={{
-				tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-				headerShown: false,
-			}}
-		>
-			<Tabs.Screen
-				name="index"
-				options={{
-					title: 'Home',
-					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-					),
-				}}
-			/>
-			<Tabs.Screen
-				name="explore"
-				options={{
-					title: 'Explore',
-					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-					),
-				}}
-			/>
-		</Tabs>
+		<SafeAreaProvider>
+			<GestureHandlerRootView style={{ flex: 1 }}>
+				<RootNavigation />
+
+				<StatusBar style="auto" />
+			</GestureHandlerRootView>
+		</SafeAreaProvider>
 	)
 }
+
+const RootNavigation = () => {
+	return (
+		<Stack>
+			<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+			<Stack.Screen
+				name="player"
+				options={{
+					presentation: 'card',
+					gestureEnabled: true,
+					gestureDirection: 'vertical',
+					animationDuration: 400,
+					headerShown: false,
+				}}
+			/>
+
+			<Stack.Screen
+				name="(modals)/addToPlaylist"
+				options={{
+					presentation: 'modal',
+					headerStyle: {
+						backgroundColor: colors.background,
+					},
+					headerTitle: 'Add to playlist',
+					headerTitleStyle: {
+						color: colors.text,
+					},
+				}}
+			/>
+		</Stack>
+	)
+}
+
+export default App
