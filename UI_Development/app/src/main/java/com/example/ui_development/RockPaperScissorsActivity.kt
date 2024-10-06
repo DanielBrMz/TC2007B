@@ -38,11 +38,11 @@ class RockPaperScissorsActivity : AppCompatActivity() {
         ivComputerChoice.setImageResource(getChoiceImage(computerChoice))
 
         val result = when {
-            playerChoice == computerChoice -> "It's a tie!"
+            playerChoice == computerChoice -> "Empate!"
             (playerChoice == "rock" && computerChoice == "scissors") ||
                     (playerChoice == "paper" && computerChoice == "rock") ||
-                    (playerChoice == "scissors" && computerChoice == "paper") -> "You win!"
-            else -> "Computer wins!"
+                    (playerChoice == "scissors" && computerChoice == "paper") -> "Ganaste!"
+            else -> "La computadora gana!"
         }
 
         tvResult.text = result
@@ -53,7 +53,7 @@ class RockPaperScissorsActivity : AppCompatActivity() {
             "rock" -> R.drawable.rock
             "paper" -> R.drawable.paper
             "scissors" -> R.drawable.scissors
-            else -> throw IllegalArgumentException("Invalid choice")
+            else -> throw IllegalArgumentException("Elección inválida")
         }
     }
 }
