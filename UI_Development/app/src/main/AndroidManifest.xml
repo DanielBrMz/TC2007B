@@ -28,6 +28,10 @@
             android:name=".FeatureSelectionActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".TemperatureConverterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
     </application>
 
 </manifest>
