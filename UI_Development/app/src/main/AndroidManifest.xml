@@ -37,6 +37,11 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             />
+        <activity
+            android:name=".QuadraticEquationSolverActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            />
     </application>
 
 </manifest>
