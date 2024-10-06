@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ax² + bx + c = 0"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/etA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valor de a"
+        android:inputType="numberDecimal|numberSigned"/>
+
+    <EditText
+        android:id="@+id/etB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valor de b"
+        android:inputType="numberDecimal|numberSigned"/>
+
+    <EditText
+        android:id="@+id/etC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valor de c"
+        android:inputType="numberDecimal|numberSigned"/>
+
+    <Button
+        android:id="@+id/btnSolve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resolver"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"/>
+
+</LinearLayout>
