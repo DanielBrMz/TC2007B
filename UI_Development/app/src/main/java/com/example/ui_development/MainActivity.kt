@@ -1,47 +1,37 @@
 package com.example.ui_development
 
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.ui_development.ui.theme.UI_DevelopmentTheme
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+    private lateinit var etUsername: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var btnLogin: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            UI_DevelopmentTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+        setContentView(R.layout.activity_main)
+
+        etUsername = findViewById(R.id.etUsername)
+        etPassword = findViewById(R.id.etPassword)
+        btnLogin = findViewById(R.id.btnLogin)
+
+        btnLogin.setOnClickListener {
+            val username = etUsername.text.toString()
+            val password = etPassword.text.toString()
+
+            if (username == "admin" && password == "password") {
+                // Login exitoso, navegar a la siguiente actividad
+                val intent = Intent(this, FeatureSelectionActivity::class.java)
+                startActivity(intent)
+            } else {
+                // Login fallido, mostrar mensaje de error
+                Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    UI_DevelopmentTheme {
-        Greeting("Android")
     }
 }
