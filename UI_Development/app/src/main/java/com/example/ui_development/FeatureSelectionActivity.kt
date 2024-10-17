@@ -11,9 +11,19 @@ class FeatureSelectionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feature_selection)
 
         val btnTemperatureConverter = findViewById<Button>(R.id.btnTemperatureConverter)
+        val btnRockPaperScissors = findViewById<Button>(R.id.btnRockPaperScissors)
+        val btnQuadraticEquation = findViewById<Button>(R.id.btnQuadraticEquation)
+
         btnTemperatureConverter.setOnClickListener {
-            val intent = Intent(this, TemperatureConverterActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, TemperatureConverterActivity::class.java))
+        }
+
+        btnRockPaperScissors.setOnClickListener {
+            startActivity(Intent(this, RockPaperScissorsActivity::class.java))
+        }
+
+        btnQuadraticEquation.setOnClickListener {
+            startActivity(Intent(this, QuadraticEquationSolverActivity::class.java))
         }
     }
 }
